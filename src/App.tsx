@@ -677,9 +677,12 @@ export default function App() {
             <img src={CS_LOGO} alt="ClicksScale" className="h-10 object-contain" />
           </div>
           <h2 className="text-4xl font-extrabold text-gray-900 mb-3 leading-tight">Patīk tas, ko redzi?</h2>
-          <p className="text-xl text-gray-400 mb-3">Tieši tā izskatās mūsu darbs.</p>
-          <p className="text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
-            Šī demonstrācijas lapa tika izveidota 48 stundu laikā — ar jūsu īstajiem attēliem, jūsu krāsām, jūsu produktiem. Mēs veidojam mājaslapas, kas pārdod.
+          <p className="text-xl text-gray-600 mb-4">Tas, ko redzi — ir tikai aisberga redzamā daļa.</p>
+          <p className="text-gray-500 max-w-lg mx-auto mb-4 leading-relaxed">
+            Šī lapa tika izveidota 48 stundu laikā — ar jūsu īstajiem attēliem, jūsu krāsām, jūsu produktiem. Taču vizuālais izskats ir tikai sākums.
+          </p>
+          <p className="text-gray-500 max-w-lg mx-auto mb-10 leading-relaxed">
+            Aiz tā stāv tehnoloģijas un atjauninājumi, kas palīdz ar SEO rankošanos Google un AI laikmeta meklētājos — tā jūsu klienti jūs atrod, pirms viņi vispār nokļūst uz lapas.
           </p>
           {/* Primary CTA */}
           <a href="mailto:hello@clicksscale.com"

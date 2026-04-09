@@ -13,6 +13,20 @@ const SKILLS = [
   "Datu balstīta pieeja", "Mērogojami risinājumi", "Ilgtermiņa sadarbība", "Stratēģiskā plānošana",
 ];
 
+const CS_TESTIMONIALS = [
+  { name: "Jānis Bērziņš", company: "AgroTech SIA", text: "ClicksScale izveidoja mūsu mājas lapu 3 nedēļu laikā. Jauno klientu pieprasījums pieauga jau pirmajā mēnesī — rezultāts pārsniedza cerības.", stars: 5 },
+  { name: "Inga Kalniņa", company: "Baltic Grain OÜ", text: "Profesionāla komanda, kas saprot lauksaimniecības nozari. Mājaslapa izskatās moderna un uzreiz rada uzticamības sajūtu pie klientiem.", stars: 5 },
+  { name: "Māris Ozols", company: "ZS Ozolkalns", text: "Beidzot mājaslapa, ar kuru var lepoties. Klienti paši min, ka uzreiz jūtas pārliecināti darīt biznesu ar mums.", stars: 5 },
+];
+
+const CS_FAQ = [
+  { q: "Cik ilgi aizņem jaunas mājaslapas izveide?", a: "Tipiska mājaslapa ir gatava 3–6 nedēļu laikā. Šo demonstrācijas lapu mēs izveidojām 48 stundu laikā — kā pierādījumu tam, ko esam spējīgi izdarīt." },
+  { q: "Cik maksā jauna mājaslapa?", a: "Cena atkarīga no projekta apjoma. Mēs piedāvājam bezmaksas konsultāciju, kurā saprotam jūsu vajadzības un sagatavosim precīzu piedāvājumu bez slēptajām izmaksām." },
+  { q: "Ko ietver mājaslapa SEO ziņā?", a: "Katra mājaslapa ietver tehnisko SEO optimizāciju, strukturētos datus (schema.org), lapu ātruma optimizāciju un mobilās versijas pielāgošanu. Tas palīdz atrast jūs gan Google, gan AI meklētājos." },
+  { q: "Vai jūs nodrošināt arī uzturēšanu pēc palaišanas?", a: "Jā. Mēs piedāvājam uzturēšanas pakalpojumus, regulārus atjauninājumus un tehnisko atbalstu. Jūs koncentrējaties uz savu biznesu — mēs parūpēsimies par mājas lapu." },
+  { q: "Vai varu redzēt vairāk jūsu darbu piemērus?", a: "Protams — portfolio un klientu veiksmes stāsti pieejami clickscale.agency/lv/veiksmes-stasti. Tur var redzēt reālus pirms/pēc piemērus." },
+];
+
 // ─── MEXA assets — proxied via wsrv.nl for HTTPS (mexa.lv has no SSL) ───────
 const px = (path: string) => `https://wsrv.nl/?url=mexa.lv${path}`;
 
@@ -162,6 +176,7 @@ export default function App() {
   const [fadeIn, setFadeIn] = useState(true);
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openCsFaq, setOpenCsFaq] = useState<number | null>(null);
 
   // Schema.org JSON-LD — FAQPage + LocalBusiness (SEO, swapped per client)
   useEffect(() => {
@@ -320,6 +335,95 @@ export default function App() {
           </button>
           <p className="mt-5 text-xs text-gray-400">Bezmaksas demonstrācija · Nav saistošu pienākumu</p>
         </div>
+
+        {/* How it works */}
+        <div className="bg-gray-50 border-t border-gray-100 py-16 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600 mb-2">Process</p>
+            <h2 className="text-2xl font-extrabold text-gray-900 mb-10">Kā tas strādā?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { n: "01", title: "Bezmaksas konsultācija", body: "30 minūšu saruna, kurā iepazīstamies ar jūsu biznesu un mērķiem. Bez saistošiem pienākumiem." },
+                { n: "02", title: "Izstrāde un apstiprināšana", body: "Mēs veidojam lapu ar jūsu zīmolu, attēliem un saturu. Jūs apstiprina dizainu katrā solī." },
+                { n: "03", title: "Palaišana un izaugsme", body: "Mājaslapa tiek palaista ar pilnu SEO iestatīšanu. Sekojam rezultātiem kopā ar jums." },
+              ].map(({ n, title, body }) => (
+                <div key={n} className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-blue-600 text-white font-extrabold text-lg flex items-center justify-center mb-4">{n}</div>
+                  <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Stats bar */}
+        <div className="bg-blue-600 py-8 px-6">
+          <div className="max-w-3xl mx-auto grid grid-cols-3 gap-4 text-center">
+            {[{ n: "50+", l: "Apmierināti klienti" }, { n: "5+", l: "Gadi pieredzē" }, { n: "3", l: "Baltijas valstis" }].map((s) => (
+              <div key={s.l}>
+                <div className="text-3xl font-extrabold text-white mb-1">{s.n}</div>
+                <div className="text-blue-100 text-xs">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ClicksScale testimonials */}
+        <div className="bg-white py-16 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600 mb-2">Atsauksmes</p>
+              <h2 className="text-2xl font-extrabold text-gray-900">Ko saka mūsu klienti</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {CS_TESTIMONIALS.map(({ name, company, text, stars }) => (
+                <div key={name} className="bg-gray-50 rounded-2xl p-6 flex flex-col gap-4 border border-gray-100">
+                  <Stars n={stars} />
+                  <p className="text-sm text-gray-600 leading-relaxed flex-1">"{text}"</p>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">{name}</p>
+                    <p className="text-[11px] text-gray-400 mt-0.5">{company}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ClicksScale FAQ */}
+        <div className="bg-gray-50 py-16 px-6 border-t border-gray-100">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600 mb-2">BUJ</p>
+              <h2 className="text-2xl font-extrabold text-gray-900">Bieži uzdotie jautājumi</h2>
+            </div>
+            <div className="space-y-3">
+              {CS_FAQ.map(({ q, a }, i) => (
+                <div key={q} className="border border-gray-200 rounded-xl overflow-hidden bg-white">
+                  <button
+                    onClick={() => setOpenCsFaq(openCsFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between px-6 py-4 text-left cursor-pointer hover:bg-gray-50 transition-colors"
+                  >
+                    <span className="text-sm font-semibold text-gray-900 pr-4">{q}</span>
+                    <span className="flex-shrink-0 text-gray-400 text-lg leading-none transition-transform duration-200" style={{ transform: openCsFaq === i ? "rotate(180deg)" : "none" }}>▾</span>
+                  </button>
+                  {openCsFaq === i && (
+                    <div className="px-6 pb-5 text-sm text-gray-500 leading-relaxed border-t border-gray-100 pt-4">{a}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <button
+                onClick={() => scrollTo("mexa")}
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all duration-200 cursor-pointer"
+              >
+                Skatīt demonstrāciju <ChevronDown />
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
@@ -384,42 +488,44 @@ export default function App() {
         </div>{/* end sticky wrapper */}
 
         {/* Hero Slider */}
-        <div className="relative overflow-hidden bg-gray-900" style={{ height: "480px" }}>
-          <img
-            src={MEXA.slides[slide]}
-            alt="MEXA"
-            className={`w-full h-full object-cover transition-opacity duration-300 ${fadeIn ? "opacity-100" : "opacity-0"}`}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-          <div className="absolute inset-0 flex items-center">
-            <div className="max-w-7xl mx-auto px-8 w-full">
-              <p className="text-white/80 text-sm font-semibold uppercase tracking-[0.2em] mb-3">
-                GSI (ASV) Oficiālais Pārstāvis Baltijā
-              </p>
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6 max-w-xl">
-                Mēs pārstāvam jūsu intereses —<br />
-                <span style={{ color: "#7dd356" }}>graudu tehnoloģiju eksperti</span>
-              </h2>
-              <button
-                onClick={() => scrollTo("products")}
-                style={{ backgroundColor: MEXA.green }}
-                className="inline-flex items-center gap-2 text-white font-bold px-7 py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer shadow-lg"
-              >
-                Skatīt produktus <ArrowRight />
-              </button>
+        <div className="px-4 sm:px-6 pt-4 pb-2">
+          <div className="relative overflow-hidden bg-gray-900 rounded-2xl" style={{ height: "520px" }}>
+            <img
+              src={MEXA.slides[slide]}
+              alt="MEXA"
+              className={`w-full h-full object-cover transition-opacity duration-300 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 flex items-end pb-10">
+              <div className="max-w-7xl mx-auto px-8 w-full">
+                <p className="text-white/70 text-xs font-semibold uppercase tracking-[0.2em] mb-2">
+                  GSI (ASV) Oficiālais Pārstāvis Baltijā
+                </p>
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-5 max-w-xl">
+                  Mēs pārstāvam jūsu intereses —<br />
+                  <span style={{ color: "#28b358" }}>graudu tehnoloģiju eksperti</span>
+                </h2>
+                <button
+                  onClick={() => scrollTo("products")}
+                  style={{ backgroundColor: MEXA.green }}
+                  className="inline-flex items-center gap-2 text-white font-bold px-7 py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer shadow-lg"
+                >
+                  Skatīt produktus <ArrowRight />
+                </button>
+              </div>
             </div>
-          </div>
-          <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
-            <ChevronLeft />
-          </button>
-          <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
-            <ChevronRight />
-          </button>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {MEXA.slides.map((_, i) => (
-              <button key={i} onClick={() => setSlide(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${i === slide ? "bg-white scale-125" : "bg-white/50"}`} />
-            ))}
+            <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
+              <ChevronLeft />
+            </button>
+            <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
+              <ChevronRight />
+            </button>
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {MEXA.slides.map((_, i) => (
+                <button key={i} onClick={() => setSlide(i)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${i === slide ? "bg-white scale-125" : "bg-white/50"}`} />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -469,8 +575,8 @@ export default function App() {
               },
             ].map((p) => (
               <div key={p.title} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="bg-gray-50 p-6 flex items-center justify-center h-56">
-                  <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain" />
+                <div className="bg-white p-6 flex items-center justify-center h-56">
+                  <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain rounded-xl" />
                 </div>
                 <div className="p-6">
                   <p className="text-xs font-bold uppercase tracking-[0.12em] mb-1" style={{ color: MEXA.green }}>{p.tag}</p>
@@ -526,7 +632,7 @@ export default function App() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
               {MEXA.coolers.map((c) => (
-                <div key={c.name} className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col items-center text-center hover:border-green-300 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                <div key={c.name} className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center text-center hover:border-green-300 hover:shadow-sm transition-all duration-200 cursor-pointer group">
                   <img src={c.img} alt={c.name} className="h-20 w-full object-contain mb-3 group-hover:scale-105 transition-transform duration-200" />
                   <p className="text-xs font-medium text-gray-600 leading-tight">{c.name}</p>
                 </div>

@@ -143,7 +143,7 @@ export default function App() {
               <img src={CS_LOGO} alt="ClicksScale" className="h-9 w-9 rounded-full object-contain shadow-sm" />
               <div>
                 <p className="text-sm font-bold text-gray-900 leading-tight">ClicksScale</p>
-                <p className="text-[11px] text-gray-400">Web Development & Digital Marketing Agency</p>
+                <p className="text-[11px] text-gray-400">Tīmekļa izstrādes & digitālā mārketinga aģentūra</p>
               </div>
             </div>
             <div className="flex items-center gap-3">

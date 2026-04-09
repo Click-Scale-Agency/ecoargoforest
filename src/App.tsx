@@ -238,6 +238,9 @@ export default function App() {
       ══════════════════════════════════════════════════════ */}
       <div id="mexa">
 
+        {/* Sticky wrapper — banner + nav stick together */}
+        <div className="sticky top-0 z-40">
+
         {/* Announcement bar */}
         {showBanner && (
           <div style={{ backgroundColor: MEXA.green }} className="relative flex items-center justify-center px-6 py-2 text-white text-sm font-semibold">
@@ -258,7 +261,7 @@ export default function App() {
         )}
 
         {/* Nav */}
-        <nav style={{ backgroundColor: MEXA.greenDark }} className="sticky top-0 z-40">
+        <nav style={{ backgroundColor: MEXA.greenDark }}>
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
             <img src={MEXA.logo} alt="MEXA" className="h-12 py-1 object-contain" />
             <div className="hidden md:flex items-center">
@@ -289,6 +292,7 @@ export default function App() {
             <div className="md:hidden text-white text-2xl px-3 py-3 cursor-pointer">☰</div>
           </div>
         </nav>
+        </div>{/* end sticky wrapper */}
 
         {/* Hero Slider */}
         <div className="relative overflow-hidden bg-gray-900" style={{ height: "480px" }}>

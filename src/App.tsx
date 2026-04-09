@@ -155,7 +155,7 @@ export default function App() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <a href="https://clickscale.agency/case-studies" target="_blank" rel="noopener noreferrer"
+              <a href="https://clickscale.agency/lv/veiksmes-stasti" target="_blank" rel="noopener noreferrer"
                 className="text-sm font-semibold text-blue-600 hover:text-white hover:bg-blue-600 border border-blue-200 hover:border-blue-600 px-4 py-1.5 rounded-lg transition-all duration-200 hidden sm:block whitespace-nowrap">
                 Apskati mūsu citus klientus
               </a>
@@ -538,7 +538,7 @@ export default function App() {
 
           {/* Case studies button */}
           <div className="mt-5">
-            <a href="https://clickscale.agency/case-studies" target="_blank" rel="noopener noreferrer"
+            <a href="https://clickscale.agency/lv/veiksmes-stasti" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border-2 border-blue-200 hover:border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 cursor-pointer text-base">
               Apskati mūsu citus klientus <ArrowRight />
             </a>

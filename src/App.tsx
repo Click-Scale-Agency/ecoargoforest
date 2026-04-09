@@ -34,7 +34,15 @@ const MEXA = {
   ],
 };
 
-const NAV = ["Par mums", "Graudu kaltes", "Transportēšanas iekārtas", "Uzglabāšanas tornis", "Papildpakalpojumi", "Galerija", "Kontakti"];
+const NAV_ITEMS = [
+  { label: "Par mums", sub: [] },
+  { label: "Graudu kaltes", sub: ["Mobīlās graudu kaltes", "Stacionārās graudu kaltes", "Torņkaltes", "Portatīvās kaltes X-STREAM"] },
+  { label: "Transportēšanas iekārtas", sub: ["Gliemežtransportieri", "Kausiņu elevatori", "Ķēdes transportieri", "Lentas transportieri"] },
+  { label: "Uzglabāšanas torņi", sub: [] },
+  { label: "Papildaprīkojums", sub: ["Graudu pieņemšanas bedres", "Plūsmas dalītājs", "Graudu caurules", "Tīrītāji"] },
+  { label: "Galerija", sub: [] },
+  { label: "Kontakti", sub: [] },
+];
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 const ArrowRight = () => (
@@ -265,26 +273,26 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
             <img src={MEXA.logo} alt="MEXA" className="h-12 py-1 object-contain" />
             <div className="hidden md:flex items-center">
-              {NAV.map((item) => (
-                item === "Graudu kaltes" ? (
-                  <div key={item} className="relative group">
+              {NAV_ITEMS.map(({ label, sub }) => (
+                sub.length > 0 ? (
+                  <div key={label} className="relative group">
                     <a href="#" onClick={(e) => e.preventDefault()}
-                      className="text-white text-xs font-semibold px-3 py-4 hover:opacity-80 transition-opacity uppercase tracking-wide whitespace-nowrap cursor-pointer flex items-center gap-1 block">
-                      {item} <span className="text-white/60 text-[10px]">▾</span>
+                      className="text-white text-xs font-semibold px-3 py-4 hover:opacity-80 transition-opacity uppercase tracking-wide whitespace-nowrap cursor-pointer flex items-center gap-1">
+                      {label} <span className="text-white/50 text-[10px]">▾</span>
                     </a>
-                    <div className="absolute left-0 top-full hidden group-hover:block bg-white shadow-lg border border-gray-100 min-w-[220px] z-50">
-                      {["Mobilās graudu kaltes", "Stacionārās graudu kaltes", "Tornkaltes", "Portatīvās kaltes X-Stream"].map((sub) => (
-                        <a key={sub} href="#" onClick={(e) => e.preventDefault()}
+                    <div className="absolute left-0 top-full hidden group-hover:block bg-white shadow-xl border border-gray-100 min-w-[220px] z-50 rounded-b-lg overflow-hidden">
+                      {sub.map((s) => (
+                        <a key={s} href="#" onClick={(e) => e.preventDefault()}
                           className="block px-5 py-3 text-xs font-semibold text-gray-700 hover:bg-gray-50 uppercase tracking-wide border-b border-gray-100 last:border-0 cursor-pointer">
-                          {sub}
+                          {s}
                         </a>
                       ))}
                     </div>
                   </div>
                 ) : (
-                  <a key={item} href="#" onClick={(e) => e.preventDefault()}
+                  <a key={label} href="#" onClick={(e) => e.preventDefault()}
                     className="text-white text-xs font-semibold px-3 py-4 hover:opacity-80 transition-opacity uppercase tracking-wide whitespace-nowrap cursor-pointer">
-                    {item}
+                    {label}
                   </a>
                 )
               ))}

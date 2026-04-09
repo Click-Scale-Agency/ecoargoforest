@@ -85,7 +85,7 @@ const AUDIT = {
   domain: "mexa.lv",
   timeTag: "48 st. laikā",
   problems: [
-    "Pēdējo reizi atjaunota pirms vairāk kā 10 gadiem",
+    "Novecojis dizains — neatbilst mūsdienu standartiem",
     "Nav redzama telefonā vai planšetē",
     "Bildes neielādējas — nav drošā savienojuma",
     "Google to neredz meklēšanas rezultātos",

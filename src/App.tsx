@@ -177,6 +177,8 @@ export default function App() {
   const [showBanner, setShowBanner] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [openCsFaq, setOpenCsFaq] = useState<number | null>(null);
+  const [showDemoToast, setShowDemoToast] = useState(false);
+  const demoToast = (e: React.MouseEvent) => { e.preventDefault(); setShowDemoToast(true); setTimeout(() => setShowDemoToast(false), 3500); };
 
   // Schema.org JSON-LD — FAQPage + LocalBusiness (SEO, swapped per client)
   useEffect(() => {
@@ -236,6 +238,14 @@ export default function App() {
 
   return (
     <div className="font-['Plus_Jakarta_Sans',sans-serif]">
+
+      {/* Demo toast */}
+      {showDemoToast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] bg-gray-900 text-white text-sm font-semibold px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 animate-fade-in max-w-sm text-center">
+          <span className="text-blue-400 text-lg flex-shrink-0">ℹ</span>
+          <span>Šī ir demo lapa. Lai iegūtu pilnu pieredzi, sazinieties ar <span className="text-blue-400">ClicksScale</span>.</span>
+        </div>
+      )}
 
       {/* ══════════════════════════════════════════════════════
           SECTION 1 — CLICKSSCALE DEMO FRAME
@@ -350,7 +360,7 @@ export default function App() {
           <div style={{ backgroundColor: MEXA.green }} className="relative flex items-center justify-center px-6 py-2 text-white text-sm font-semibold">
             <span className="mr-3">MEXA katalogs</span>
             <button
-              onClick={(e) => e.preventDefault()}
+              onClick={demoToast}
               className="bg-white/20 hover:bg-white/30 border border-white/40 text-white text-xs font-bold px-3 py-0.5 rounded transition-colors cursor-pointer"
             >
               Skatīt!
@@ -372,13 +382,13 @@ export default function App() {
               {NAV_ITEMS.map(({ label, sub }) => (
                 sub.length > 0 ? (
                   <div key={label} className="relative group">
-                    <a href="#" onClick={(e) => e.preventDefault()}
+                    <a href="#" onClick={demoToast}
                       className="text-white text-xs font-semibold px-3 py-4 hover:opacity-80 transition-opacity uppercase tracking-wide whitespace-nowrap cursor-pointer flex items-center gap-1">
                       {label} <span className="text-white/50 text-[10px]">▾</span>
                     </a>
                     <div className="absolute left-0 top-full hidden group-hover:block bg-white shadow-xl border border-gray-100 min-w-[220px] z-50 rounded-b-lg overflow-hidden">
                       {sub.map((s) => (
-                        <a key={s} href="#" onClick={(e) => e.preventDefault()}
+                        <a key={s} href="#" onClick={demoToast}
                           className="block px-5 py-3 text-xs font-semibold text-gray-700 hover:bg-gray-50 uppercase tracking-wide border-b border-gray-100 last:border-0 cursor-pointer">
                           {s}
                         </a>
@@ -386,7 +396,7 @@ export default function App() {
                     </div>
                   </div>
                 ) : (
-                  <a key={label} href="#" onClick={(e) => e.preventDefault()}
+                  <a key={label} href="#" onClick={demoToast}
                     className="text-white text-xs font-semibold px-3 py-4 hover:opacity-80 transition-opacity uppercase tracking-wide whitespace-nowrap cursor-pointer">
                     {label}
                   </a>
@@ -506,7 +516,7 @@ export default function App() {
                     ))}
                   </ul>
                   <div className="text-sm font-semibold text-gray-500 mb-4">Cena: {p.price}</div>
-                  <button style={{ backgroundColor: MEXA.green }} className="w-full text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity cursor-pointer text-sm">
+                  <button onClick={demoToast} style={{ backgroundColor: MEXA.green }} className="w-full text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity cursor-pointer text-sm">
                     Pieteikt konsultāciju
                   </button>
                 </div>
@@ -623,7 +633,7 @@ export default function App() {
                 <input type="text" placeholder="Jūsu vārds" className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-400 transition-colors" />
                 <input type="email" placeholder="E-pasta adrese" className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-400 transition-colors" />
                 <textarea placeholder="Jūsu ziņojums" rows={4} className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-400 transition-colors resize-none" />
-                <button style={{ backgroundColor: MEXA.green }} className="w-full text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer">
+                <button onClick={demoToast} style={{ backgroundColor: MEXA.green }} className="w-full text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer">
                   Nosūtīt
                 </button>
               </div>

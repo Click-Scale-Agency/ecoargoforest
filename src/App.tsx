@@ -793,7 +793,7 @@ export default function App() {
             <div className="grid grid-cols-2 gap-4 mb-7">
               {TEAM.map(({ photo, name, title, linkedin }) => (
                 <div key={name} className="bg-gray-50 rounded-xl p-5 flex flex-col items-center text-center">
-                  <img src={photo} alt={name} className="w-16 h-16 rounded-full object-cover mb-3 shadow-sm" />
+                  <img src={photo} alt={name} className="w-28 h-32 rounded-2xl object-cover object-top mb-3" />
                   <p className="text-sm font-bold text-gray-900 leading-tight">{name}</p>
                   <p className="text-[11px] text-gray-400 mt-0.5 mb-3 leading-tight">{title}</p>
                   <a href={linkedin} target="_blank" rel="noopener noreferrer"

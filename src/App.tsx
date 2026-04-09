@@ -4,31 +4,33 @@ import { useEffect, useState } from "react";
 const CS_LOGO =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/9xh2hCCh94Tp5EyhUvXQdPhcEWK2/uploads/1763656087512-Click%20Scale%20Favicon.png";
 
-// ─── MEXA assets (scraped from mexa.lv) ──────────────────────────────────────
+// ─── MEXA assets — proxied via wsrv.nl for HTTPS (mexa.lv has no SSL) ───────
+const px = (path: string) => `https://wsrv.nl/?url=mexa.lv${path}`;
+
 const MEXA = {
-  logo: "http://mexa.lv/wp-content/uploads/2013/05/logo_mexa.png",
+  logo: px("/wp-content/uploads/2013/05/logo_mexa.png"),
   green: "#339966",
   greenDark: "#1f5c3a",
   greenDeep: "#0d2b1a",
   slides: [
-    "http://mexa.lv/wp-content/uploads/2013/06/slaids1.png",
-    "http://mexa.lv/wp-content/uploads/2013/06/slaids2.png",
-    "http://mexa.lv/wp-content/uploads/2013/06/slaids3.png",
-    "http://mexa.lv/wp-content/uploads/2013/06/slaids4.png",
-    "http://mexa.lv/wp-content/uploads/2013/06/slaids5.png",
+    px("/wp-content/uploads/2013/06/slaids1.png"),
+    px("/wp-content/uploads/2013/06/slaids2.png"),
+    px("/wp-content/uploads/2013/06/slaids3.png"),
+    px("/wp-content/uploads/2013/06/slaids4.png"),
+    px("/wp-content/uploads/2013/06/slaids5.png"),
   ],
   products: {
-    mobile: "http://mexa.lv/wp-content/uploads/2013/05/1222_drukai1.jpg",
-    stationary: "http://mexa.lv/wp-content/uploads/2013/05/2326_drukai1.jpg",
-    hero: "http://mexa.lv/wp-content/uploads/2013/05/11.png",
+    mobile: px("/wp-content/uploads/2013/05/1222_drukai1.jpg"),
+    stationary: px("/wp-content/uploads/2013/05/2326_drukai1.jpg"),
+    hero: px("/wp-content/uploads/2013/05/11.png"),
   },
   coolers: [
-    { img: "http://mexa.lv/wp-content/uploads/2013/05/FJ.png", name: "TJ sērijas modelis" },
-    { img: "http://mexa.lv/wp-content/uploads/2013/05/GE_2009.png", name: "GZ sērijas modelis" },
-    { img: "http://mexa.lv/wp-content/uploads/2013/05/Sp_100.png", name: "SP sērijas modelis" },
-    { img: "http://mexa.lv/wp-content/uploads/2013/05/Confort.png", name: "Confort modelis" },
-    { img: "http://mexa.lv/wp-content/uploads/2013/05/Farm.png", name: "Farm modelis" },
-    { img: "http://mexa.lv/wp-content/uploads/2013/05/EC_2009.png", name: "EC sērijas modelis" },
+    { img: px("/wp-content/uploads/2013/05/FJ.png"), name: "TJ sērijas modelis" },
+    { img: px("/wp-content/uploads/2013/05/GE_2009.png"), name: "GZ sērijas modelis" },
+    { img: px("/wp-content/uploads/2013/05/Sp_100.png"), name: "SP sērijas modelis" },
+    { img: px("/wp-content/uploads/2013/05/Confort.png"), name: "Confort modelis" },
+    { img: px("/wp-content/uploads/2013/05/Farm.png"), name: "Farm modelis" },
+    { img: px("/wp-content/uploads/2013/05/EC_2009.png"), name: "EC sērijas modelis" },
   ],
 };
 

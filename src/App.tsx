@@ -650,9 +650,8 @@ export default function App() {
       ══════════════════════════════════════════════════════ */}
       <section className="bg-white border-t-4 border-blue-600">
         <div className="max-w-3xl mx-auto px-6 pt-24 pb-14 text-center">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <img src={CS_LOGO} alt="ClicksScale" className="h-12 w-12 rounded-full object-contain shadow-md" />
-            <span className="text-2xl font-bold text-gray-900">ClicksScale</span>
+          <div className="flex items-center justify-center mb-8">
+            <img src={CS_LOGO} alt="ClicksScale" className="h-10 object-contain" />
           </div>
           <h2 className="text-4xl font-extrabold text-gray-900 mb-3 leading-tight">Patīk tas, ko redzi?</h2>
           <p className="text-xl text-gray-400 mb-3">Tieši tā izskatās mūsu darbs.</p>

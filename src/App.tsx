@@ -35,6 +35,7 @@ const EAF = {
   greenDeep: "#0d260d",
   slides: [
     "https://site-1807114.mozfiles.com/files/1807114/catitems/m/ECOAGROFOREST%20SIA-498c8bcc.jpg",
+    "/hero_banner.png",
   ],
 };
 
@@ -47,12 +48,12 @@ const NAV_ITEMS = [
 ];
 
 const SERVICES = [
-  { emoji: "🌲", name: "Meža atlikumi kā izejviela", desc: "Koksnes izstrādes blakusprodukti — sveķi, mizas, zari, skujas — nenonāk atkritumu poligonā" },
-  { emoji: "🔄", name: "Bezatlikumu pārstrāde", desc: "Katra organiskā daļa tiek pārstrādāta — cirkulārā ekonomika praksē" },
-  { emoji: "🧪", name: "KKI zinātniskie pētījumi", desc: "Sadarbībā ar Latvijas Valsts koksnes ķīmijas institūtu — zinātniski pamatoti produkti" },
-  { emoji: "🌱", name: "Augsnes uzlabošana", desc: "Humīnskābes un organiskās vielas atjauno augsnes struktūru un mikrobioma daudzveidību" },
-  { emoji: "💧", name: "Bioaktīvie augu stimulanti", desc: "Koksnes ekstraktu savienojumi veicina dīgšanu, sakņu augšanu un pretestību stresam" },
-  { emoji: "🌾", name: "Ilgtspējīga lauksaimniecība", desc: "Mazāk sintētisko ķimikāliju, veselīgāka augsne, labāka ražas kvalitāte sezonā pēc sezonas" },
+  { icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M12 2L5 13h4l-2.5 7h11l-2.5-7h4L12 2z"/><line x1="12" y1="20" x2="12" y2="23"/></svg>), name: "Meža atlikumi kā izejviela", desc: "Koksnes izstrādes blakusprodukti — sveķi, mizas, zari, skujas — nenonāk atkritumu poligonā" },
+  { icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M3 2v6h6"/><path d="M3 8C6 4 10 2 14 2a10 10 0 0 1 7 17"/><path d="M21 22v-6h-6"/><path d="M21 16c-3 4-7 6-11 6A10 10 0 0 1 3 5"/></svg>), name: "Bezatlikumu pārstrāde", desc: "Katra organiskā daļa tiek pārstrādāta — cirkulārā ekonomika praksē" },
+  { icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M14 2v6l3.44 5.84A2 2 0 0 1 15.72 16H8.28a2 2 0 0 1-1.72-2.16L10 8V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>), name: "KKI zinātniskie pētījumi", desc: "Sadarbībā ar Latvijas Valsts koksnes ķīmijas institūtu — zinātniski pamatoti produkti" },
+  { icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M7 20h10"/><path d="M10 20c5.5-2.5 4-6 0-6"/><path d="M10 14c3.5 0 6-2 6-5s-2.5-5-6-5-6 2-6 5 2.5 5 6 5"/><path d="M4 9c0 3 2.5 5 6 5"/></svg>), name: "Augsnes uzlabošana", desc: "Humīnskābes un organiskās vielas atjauno augsnes struktūru un mikrobioma daudzveidību" },
+  { icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5.5 12 3c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>), name: "Bioaktīvie augu stimulanti", desc: "Koksnes ekstraktu savienojumi veicina dīgšanu, sakņu augšanu un pretestību stresam" },
+  { icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>), name: "Ilgtspējīga lauksaimniecība", desc: "Mazāk sintētisko ķimikāliju, veselīgāka augsne, labāka ražas kvalitāte sezonā pēc sezonas" },
 ];
 
 // ─── Audit data (swap per client) ────────────────────────────────────────────
@@ -485,10 +486,7 @@ export default function App() {
         <div className="bg-white py-10 px-6 border-b border-gray-100">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 items-center">
             {/* IMAGE PLACEHOLDER — generate: lush green forest floor with sunlight filtering through trees, rich dark soil visible, professional nature photography */}
-            <div className="w-full md:w-72 h-52 rounded-lg shadow-md flex-shrink-0 bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-center px-4">
-              <span className="text-3xl mb-2">🖼️</span>
-              <p className="text-[10px] text-gray-400 leading-tight">PLACEHOLDER: Meža grīda ar saknēm un auglīgu augsni, profesionāla dabas fotogrāfija</p>
-            </div>
+            <img src="/forest.png" alt="Zinātniski pamatota lauksaimniecība" className="w-full md:w-72 h-52 rounded-lg shadow-md flex-shrink-0 object-cover" />
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>Par mums</p>
               <h3 className="text-2xl font-extrabold text-gray-900 mb-4 leading-tight">
@@ -527,35 +525,32 @@ export default function App() {
                 {
                   tag: "Pamatmēslojums",
                   title: "OrgoForest Granula",
-                  imgNote: "PLACEHOLDER: Close-up of dark rich organic fertilizer granules on wooden surface, moody natural lighting, product photography",
+                  imgSrc: "/granules.png",
                   specs: ["Koksnes pelni + lignīna savienojumi", "N-P-K + mikroelementi", "Graudaugi, rapsis, dārzeņi", "Lietošana: pavasarī pirms sējas"],
                   badge: "Vispieprasītākais",
                 },
                 {
                   tag: "Augšanas stimulants",
                   title: "OrgoForest Aktīvs",
-                  imgNote: "PLACEHOLDER: Young seedlings sprouting from dark soil with roots visible, macro photography, green and brown tones",
+                  imgSrc: "/seedlings.png",
                   specs: ["Koksnes ekstraktu bioaktīvie savienojumi", "Stimulē dīgšanu un sakņu augšanu", "Palielina stresa izturību", "Lietošana: lapu apstrāde vai laistīšana"],
                   badge: "KKI formula",
                 },
                 {
                   tag: "Augsnes kondicionieris",
                   title: "OrgoForest Augsne",
-                  imgNote: "PLACEHOLDER: Hands holding rich dark humus soil with visible organic matter, warm natural light, agricultural photography",
+                  imgSrc: "/soil.png",
                   specs: ["Humīnskābes no koksnes biomasas", "Uzlabo ūdens aizturi un struktūru", "Aktivizē augsnes mikrobioma", "Lietošana: rudenī vai pavasarī"],
                   badge: "Ilgtermiņa efekts",
                 },
               ].map((p) => (
                 <div key={p.title} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                   {/* Image placeholder */}
-                  <div className="bg-gray-100 border-b border-dashed border-gray-300 flex flex-col items-center justify-center h-44 px-4 text-center">
-                    <span className="text-2xl mb-1">🖼️</span>
-                    <p className="text-[9px] text-gray-400 leading-tight">{p.imgNote}</p>
-                  </div>
+                  <img src={p.imgSrc} alt={p.title} className="w-full h-44 object-cover border-b border-gray-200" />
                   <div className="p-5">
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-xs font-bold uppercase tracking-[0.12em]" style={{ color: EAF.green }}>{p.tag}</p>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: EAF.greenDark }}>{p.badge}</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white whitespace-nowrap shrink-0" style={{ backgroundColor: EAF.greenDark }}>{p.badge}</span>
                     </div>
                     <h4 className="text-base font-extrabold text-gray-900 mb-3">{p.title}</h4>
                     <ul className="space-y-1.5 mb-4">
@@ -578,7 +573,13 @@ export default function App() {
 
             {/* KKI partnership strip */}
             <div className="mt-10 border border-green-200 rounded-2xl p-6 bg-green-50 flex flex-col sm:flex-row items-center gap-5">
-              <div className="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 text-2xl">🔬</div>
+              <div className="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0" style={{ color: EAF.green }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+                  <path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/>
+                  <path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2z"/>
+                  <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
+                </svg>
+              </div>
               <div className="flex-1 text-center sm:text-left">
                 <p className="text-xs font-bold uppercase tracking-[0.12em] mb-1" style={{ color: EAF.green }}>Zinātniskie partneri</p>
                 <p className="text-sm font-extrabold text-gray-900 mb-1">Latvijas Valsts koksnes ķīmijas institūts (KKI)</p>
@@ -624,15 +625,15 @@ export default function App() {
               <p className="text-gray-400 text-sm mt-2 max-w-lg mx-auto">Cirkulārais cikls, kas pārvērš mežizstrādes blakusproduktus augstvērtīgā lauksaimniecības resursos</p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {SERVICES.map(({ emoji, name, desc }) => (
+              {SERVICES.map(({ icon, name, desc }) => (
                 <div
                   key={name}
                   onClick={demoToast}
                   className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col items-center text-center hover:border-green-300 hover:shadow-sm transition-all duration-200 cursor-pointer group"
                 >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 text-2xl group-hover:scale-110 transition-transform duration-200"
-                    style={{ backgroundColor: EAF.green + "18" }}>
-                    {emoji}
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200"
+                    style={{ backgroundColor: EAF.green + "18", color: EAF.green }}>
+                    {icon}
                   </div>
                   <p className="text-sm font-bold text-gray-900 mb-1 leading-tight">{name}</p>
                   <p className="text-[11px] text-gray-400 leading-tight">{desc}</p>
@@ -750,11 +751,20 @@ export default function App() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-3">Produkti</p>
               <div className="text-gray-300 text-xs space-y-1">
-                <p className="text-white font-semibold">🌿 OrgoForest Granula</p>
+                <p className="text-white font-semibold flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 flex-shrink-0 opacity-70"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                  OrgoForest Granula
+                </p>
                 <p>Organominerālais pamatmēslojums</p>
-                <p className="text-white font-semibold mt-2">💧 OrgoForest Aktīvs</p>
+                <p className="text-white font-semibold mt-2 flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 flex-shrink-0 opacity-70"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5.5 12 3c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+                  OrgoForest Aktīvs
+                </p>
                 <p>Bioaktīvais augu augšanas stimulants</p>
-                <p className="text-white font-semibold mt-2">🌱 OrgoForest Augsne</p>
+                <p className="text-white font-semibold mt-2 flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 flex-shrink-0 opacity-70"><path d="M7 20h10"/><path d="M10 20c5.5-2.5 4-6 0-6"/><path d="M10 14c3.5 0 6-2 6-5s-2.5-5-6-5-6 2-6 5 2.5 5 6 5"/><path d="M4 9c0 3 2.5 5 6 5"/></svg>
+                  OrgoForest Augsne
+                </p>
                 <p>Augsnes kondicionieris un struktūras uzlabotājs</p>
               </div>
             </div>

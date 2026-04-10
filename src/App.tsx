@@ -36,6 +36,7 @@ const EAF = {
   slides: [
     "https://site-1807114.mozfiles.com/files/1807114/catitems/m/ECOAGROFOREST%20SIA-498c8bcc.jpg",
     "/hero_banner.png",
+    "/lab-workers.png",
   ],
 };
 
@@ -275,7 +276,7 @@ export default function App() {
         <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-16">
           <div className="flex flex-row items-center justify-center gap-8 mb-8">
             <div className="flex items-center gap-3">
-              <img src="/lab-workers.png" alt="Lab production of organic fertilizers" className="object-cover rounded-xl drop-shadow-lg" style={{ width: '200px', height: '200px' }} />
+              <img src={EAF.logo} alt="EcoAgroForest Logo" className="object-contain drop-shadow-lg" style={{ width: '160px', height: '160px' }} />
             </div>
             <div className="inline-flex items-center gap-2 bg-white/15 border border-white/20 text-sm font-medium px-4 py-2 rounded-full text-highlight">
               <span className="relative flex h-2 w-2">

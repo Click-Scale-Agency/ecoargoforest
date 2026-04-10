@@ -34,7 +34,6 @@ const EAF = {
   greenDark: "#1e4d1e",
   greenDeep: "#0d260d",
   slides: [
-    "https://site-1807114.mozfiles.com/files/1807114/catitems/m/ECOAGROFOREST%20SIA-498c8bcc.jpg",
     "/hero_banner.png",
     "/lab-workers.png",
   ],

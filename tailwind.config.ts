@@ -14,6 +14,10 @@ export default {
     },
     extend: {
       colors: {
+        highlight: {
+          DEFAULT: "hsl(var(--highlight))",
+          foreground: "hsl(var(--highlight-foreground))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -63,7 +67,17 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        heading: ["var(--font-heading)"],
+        body: ["var(--font-body)"],
+      },
+      boxShadow: {
+        "glow-yellow": "0 0 20px 2px hsl(76 100% 57% / 0.35)",
+        "glow-yellow-lg": "0 0 30px 6px hsl(76 100% 57% / 0.5)",
+      },
       keyframes: {
+        "marquee": { "0%": { transform: "translateX(0)" }, "100%": { transform: "translateX(-50%)" } },
+        "chevron-bounce": { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(4px)" } },
         "accordion-down": {
           from: {
             height: "0",
@@ -82,6 +96,8 @@ export default {
         },
       },
       animation: {
+        "marquee": "marquee 30s linear infinite",
+        "chevron-bounce": "chevron-bounce 1.5s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

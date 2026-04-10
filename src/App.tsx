@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ─── ClicksScale brand ────────────────────────────────────────────────────────
 const CS_LOGO = "https://clickscale.agency/assets/click-scale-logo-IBjJ635-.png";
@@ -27,45 +27,92 @@ const CS_FAQ = [
   { q: "Vai varu redzēt vairāk jūsu darbu piemērus?", a: "Protams — portfolio un klientu veiksmes stāsti pieejami clickscale.agency/lv/veiksmes-stasti. Tur var redzēt reālus pirms/pēc piemērus." },
 ];
 
-// ─── MEXA assets — proxied via wsrv.nl for HTTPS (mexa.lv has no SSL) ───────
-const px = (path: string) => `https://wsrv.nl/?url=mexa.lv${path}`;
-
-const MEXA = {
-  logo: px("/wp-content/uploads/2013/05/logo_mexa.png"),
-  green: "#339966",
-  greenDark: "#1f5c3a",
-  greenDeep: "#0d2b1a",
+// ─── EcoAgroForest assets ─────────────────────────────────────────────────────
+const EAF = {
+  logo: '/eaf-logo.png',
+  green: "#3d7a3d",
+  greenDark: "#1e4d1e",
+  greenDeep: "#0d260d",
   slides: [
-    px("/wp-content/uploads/2013/06/slaids1.png"),
-    px("/wp-content/uploads/2013/06/slaids2.png"),
-    px("/wp-content/uploads/2013/06/slaids3.png"),
-    px("/wp-content/uploads/2013/06/slaids4.png"),
-    px("/wp-content/uploads/2013/06/slaids5.png"),
-  ],
-  products: {
-    mobile: px("/wp-content/uploads/2013/05/1222_drukai1.jpg"),
-    stationary: px("/wp-content/uploads/2013/05/2326_drukai1.jpg"),
-    hero: px("/wp-content/uploads/2013/05/11.png"),
-  },
-  coolers: [
-    { img: px("/wp-content/uploads/2013/05/FJ.png"), name: "TJ sērijas modelis" },
-    { img: px("/wp-content/uploads/2013/05/GE_2009.png"), name: "GZ sērijas modelis" },
-    { img: px("/wp-content/uploads/2013/05/Sp_100.png"), name: "SP sērijas modelis" },
-    { img: px("/wp-content/uploads/2013/05/Confort.png"), name: "Confort modelis" },
-    { img: px("/wp-content/uploads/2013/05/Farm.png"), name: "Farm modelis" },
-    { img: px("/wp-content/uploads/2013/05/EC_2009.png"), name: "EC sērijas modelis" },
+    "https://site-1807114.mozfiles.com/files/1807114/catitems/m/ECOAGROFOREST%20SIA-498c8bcc.jpg",
   ],
 };
 
 const NAV_ITEMS = [
   { label: "Par mums", sub: [] },
-  { label: "Graudu kaltes", sub: ["Mobīlās graudu kaltes", "Stacionārās graudu kaltes", "Torņkaltes", "Portatīvās kaltes X-STREAM"] },
-  { label: "Transportēšanas iekārtas", sub: ["Gliemežtransportieri", "Kausiņu elevatori", "Ķēdes transportieri", "Lentas transportieri"] },
-  { label: "Uzglabāšanas torņi", sub: [] },
-  { label: "Papildaprīkojums", sub: ["Graudu pieņemšanas bedres", "Plūsmas dalītājs", "Graudu caurules", "Tīrītāji"] },
-  { label: "Galerija", sub: [] },
+  { label: "Produkti", sub: ["Organominerālais pamatmēslojums", "Augu augšanas stimulants", "Augsnes kondicionieris", "Individuālie maisījumi"] },
+  { label: "Ražošana", sub: ["Izejmateriāli", "Ražošanas process", "Kvalitātes kontrole"] },
+  { label: "Zinātne & KKI", sub: [] },
   { label: "Kontakti", sub: [] },
 ];
+
+const SERVICES = [
+  { emoji: "🌲", name: "Meža atlikumi kā izejviela", desc: "Koksnes izstrādes blakusprodukti — sveķi, mizas, zari, skujas — nenonāk atkritumu poligonā" },
+  { emoji: "🔄", name: "Bezatlikumu pārstrāde", desc: "Katra organiskā daļa tiek pārstrādāta — cirkulārā ekonomika praksē" },
+  { emoji: "🧪", name: "KKI zinātniskie pētījumi", desc: "Sadarbībā ar Latvijas Valsts koksnes ķīmijas institūtu — zinātniski pamatoti produkti" },
+  { emoji: "🌱", name: "Augsnes uzlabošana", desc: "Humīnskābes un organiskās vielas atjauno augsnes struktūru un mikrobioma daudzveidību" },
+  { emoji: "💧", name: "Bioaktīvie augu stimulanti", desc: "Koksnes ekstraktu savienojumi veicina dīgšanu, sakņu augšanu un pretestību stresam" },
+  { emoji: "🌾", name: "Ilgtspējīga lauksaimniecība", desc: "Mazāk sintētisko ķimikāliju, veselīgāka augsne, labāka ražas kvalitāte sezonā pēc sezonas" },
+];
+
+// ─── Audit data (swap per client) ────────────────────────────────────────────
+const AUDIT = {
+  domain: "EcoAgroForest SIA",
+  timeTag: "48 st. laikā",
+  problems: [
+    "Nav mājaslapas — uzņēmums nav atrodams Google meklēšanā",
+    "Potenciālie klienti neatrod kontaktinformāciju tiešsaistē",
+    "Nav digitāla pakalpojumu kataloga — prezentācija tikai klātienē vai pa tālruni",
+    "Konkurenti ar mājaslapa saņem jūsu potenciālos klientus",
+    "Nav kontaktformas — pieprasījumi tiek zaudēti ārpus darba laika",
+    "Meklēšanas sistēmas un AI nevar ieteikt jūsu pakalpojumus",
+  ],
+  gains: [
+    "Produktu katalogs ar zinātniski pamatotiem sastāviem un pielietojumu",
+    "KKI sadarbības stāsts — uzticamības un inovācijas pierādījums tiešsaistē",
+    "Tiešsaistes pieprasījumu forma — pieejama 24/7 lauksaimniekiem visā Latvijā",
+    "SEO optimizācija — redzami organiskās lauksaimniecības un mēslošanas meklējienos",
+    "Schema.org — Google rāda produktus, adresi un kontaktus tieši meklēšanā",
+    "AI laikmeta meklētāji iesaka produktus ilgtspējīgas lauksaimniecības meklējienos",
+  ],
+};
+
+// ─── SEO content (swap per client) ───────────────────────────────────────────
+const TESTIMONIALS = [
+  {
+    name: "Aigars Freimanis",
+    company: "ZS \"Freimaņi\", Jelgavas nov.",
+    text: "Organominerālais pamatmēslojums pilnībā aizstāja sintētiskos mēslus rapša laukā. Augsnes struktūra uzlabojās redzami jau pirmajā sezonā — sēklu dīgšana ātrāka par 20%.",
+    stars: 5,
+  },
+  {
+    name: "Inga Bērziņa",
+    company: "BIO Lauku saimniecība, Cēsu nov.",
+    text: "Beidzot produkts, kas atbilst bioloģiskās lauksaimniecības standartiem un darbojas. Augsnes kondicionieris uzlaboja ūdens aizturi smilšainā augsnē — rezultāts pārsteidza.",
+    stars: 5,
+  },
+  {
+    name: "Jānis Ozoliņš",
+    company: "ZS \"Ozolkalns\", Dobeles nov.",
+    text: "Zinātniski pamatoti produkti un godīga komunikācija. Tas, ka izejvielas nāk no vietas vietējā meža un KKI pētniecības — piešķir uzticamību. Izmantoju jau trešo sezonu.",
+    stars: 5,
+  },
+];
+
+const FAQ_ITEMS = [
+  { q: "No kādiem izejmateriāliem tiek izgatavoti produkti?", a: "Produkti tiek izgatavoti no mežsaimniecības blakusproduktiem — koksnes mizas, zariem, skujām, koksnes pelniem un lignīna savienojumiem. Izejvielas papildina minerālie komponenti, nodrošinot pilnvērtīgu augu barošanu." },
+  { q: "Kāda ir atšķirība no parastajiem sintētiskajiem mēsliem?", a: "Sintētiskie mēsli darbojas ātri, bet izskalojās un noplicina augsni ilgtermiņā. Mūsu organominerālie produkti vienlaikus baro augus UN uzlabo augsnes struktūru — humīnskābes un bioaktīvie savienojumi paliek augsnē un strādā vairākas sezonas." },
+  { q: "Kā KKI sadarbība ietekmē produktu kvalitāti?", a: "Latvijas Valsts koksnes ķīmijas institūts (KKI) ir ilggadīgs pētnieku partneris. Viņu atklājumi par koksnes ķīmijas savienojumiem — sorbentiem, augšanas stimulantiem un augsnes uzlabotājiem — veido zinātnisko pamatu mūsu produktu formulām." },
+  { q: "Kādiem kultūraugiem piemēroti produkti?", a: "Produkti piemēroti graudaugiem (kvieši, mieži, rapsis), dārzeņiem, augļu dārziem un aramzemēm. Organominerālais pamatmēslojums un kondicionieris ir universāli — augu augšanas stimulants ir efektīvāks intensīvas audzēšanas kultūrām." },
+  { q: "Vai veicat augsnes analīzi pirms ieteikuma?", a: "Jā — augsnes analīze ir pamats precīzam ieteikumam. Mūsu speciālisti novērtē augsnes pH, organisko vielu saturu un trūkstošos elementus, pēc tam iesaka optimālo produktu kombināciju un devu jūsu konkrētajam laukam." },
+  { q: "Kā pasūtīt un kādi ir piegādes nosacījumi?", a: "Sazinieties pa e-pastu inagroforest@gmail.com vai zvaniet +371 25148850. Piegādājam visā Latvijā — daudzumi, laiks un cena tiek saskaņoti individuāli. Minimālais pasūtījums atkarīgs no produkta veida." },
+];
+
+const Stars = ({ n }: { n: number }) => (
+  <div className="flex gap-0.5 text-yellow-400 text-base leading-none">
+    {Array.from({ length: 5 }).map((_, i) => <span key={i} className={i < n ? "text-yellow-400" : "text-gray-200"}>★</span>)}
+  </div>
+);
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 const ArrowRight = () => (
@@ -111,65 +158,6 @@ const MapPin = () => (
   </svg>
 );
 
-// ─── Audit data (swap per client) ────────────────────────────────────────────
-const AUDIT = {
-  domain: "mexa.lv",
-  timeTag: "48 st. laikā",
-  problems: [
-    "Novecojis dizains — neatbilst mūsdienu standartiem",
-    "Nav redzama telefonā vai planšetē",
-    "Bildes neielādējas — nav drošā savienojuma",
-    "Google to neredz meklēšanas rezultātos",
-    "Kontaktinformācija nav uzreiz pamanāma",
-    "Produkti nav skaidri parādīti ar bildēm un cenām",
-  ],
-  gains: [
-    "Darbojas uz tālruņa, planšetes un datora",
-    "Visi produkti ar īstajām bildēm un aprakstiem",
-    "Kontakts redzams uzreiz — apmeklētājs var zvanīt ar 1 klikšķi",
-    "Droša vietne — darbojas visos mūsdienu pārlūkos",
-    "Jūsu brendings: zaļā krāsa, logo, produktu struktūra",
-    "Izskats, kas atbilst jūsu GSI sertifikācijas statusam",
-  ],
-};
-
-// ─── SEO content (swap per client) ───────────────────────────────────────────
-const TESTIMONIALS = [
-  {
-    name: "Jānis Kalniņš",
-    company: "ZS \"Kalnāji\", Jelgava",
-    text: "T232 mobilo kalti uzstādījām 2021. gadā. Trīs sezonas, nulle problēmu. MEXA serviss reaģē 24 stundu laikā — tas ir svarīgi ražas laikā.",
-    stars: 5,
-  },
-  {
-    name: "Andris Pētersons",
-    company: "SIA \"Lauku Darbi\", Dobele",
-    text: "Stacionārā 2100 sērija atmaksājās divās sezonās. Zinošs personāls, godīgas cenas, reāli rezultāti. Ar MEXA sadarbojos jau 7 gadus.",
-    stars: 5,
-  },
-  {
-    name: "Māris Liepiņš",
-    company: "ZS \"Ozolkalni\", Cēsis",
-    text: "Piegāde laikā, montāža profesionāla. GSI kvalitāte ar Latvijas servisu — labākā kombinācija. Noteikti ieteiktu ikvienam zemnieku saimniecībai.",
-    stars: 5,
-  },
-];
-
-const FAQ_ITEMS = [
-  { q: "Kādi modeļi ir piemēroti mazām saimniecībām?", a: "T-sērijas mobilās kaltes ir ideālas mazākām un vidēja lieluma saimniecībām — elastīgas, viegli transportējamas un ekonomiski izdevīgas." },
-  { q: "Vai MEXA nodrošina uzstādīšanu un servisu?", a: "Jā. Mēs nodrošinām pilnu pakalpojumu ciklu: konsultācija → piegāde → uzstādīšana → pēcpārdošanas serviss → rezerves daļas." },
-  { q: "Cik ilgs ir garantijas laiks GSI aprīkojumam?", a: "Standarta garantija ir 12 mēneši no uzstādīšanas brīža. Atsevišķām sistēmām pieejama pagarinātā garantija." },
-  { q: "Vai piegādājat iekārtas uz Lietuvu un Igauniju?", a: "Jā — esam GSI (ASV) oficiālais pārstāvis visās trīs Baltijas valstīs kopš 2001. gada. Piegādājam un apkalpojam visā reģionā." },
-  { q: "Kā notiek konsultācija un kā saņemt piedāvājumu?", a: "Sazinieties pa tālruni vai e-pastu. Mūsu speciālists novērtēs jūsu vajadzības un bez maksas sagatavos individuālu piedāvājumu." },
-  { q: "Vai ir pieejamas finansēšanas iespējas?", a: "Mēs sadarbojamies ar finanšu partneriem. Jautājiet mūsu konsultantam par šobrīd pieejamajiem finansēšanas risinājumiem." },
-];
-
-const Stars = ({ n }: { n: number }) => (
-  <div className="flex gap-0.5 text-yellow-400 text-base leading-none">
-    {Array.from({ length: 5 }).map((_, i) => <span key={i} className={i < n ? "text-yellow-400" : "text-gray-200"}>★</span>)}
-  </div>
-);
-
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const [slide, setSlide] = useState(0);
@@ -180,20 +168,20 @@ export default function App() {
   const [showDemoToast, setShowDemoToast] = useState(false);
   const demoToast = (e: React.MouseEvent) => { e.preventDefault(); setShowDemoToast(true); setTimeout(() => setShowDemoToast(false), 3500); };
 
-  // Schema.org JSON-LD — FAQPage + LocalBusiness (SEO, swapped per client)
+  // Schema.org JSON-LD — FAQPage + LocalBusiness
   useEffect(() => {
     const schema = {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "LocalBusiness",
-          "name": "MEXA SIA",
-          "description": "GSI (ASV) oficiālais pārstāvis Baltijas valstīs. Graudu kaltes, transportēšanas iekārtas un uzglabāšanas torņi kopš 2001.",
-          "address": { "@type": "PostalAddress", "streetAddress": "Tirgoņu iela 4a", "addressLocality": "Cēsis", "postalCode": "LV-4101", "addressCountry": "LV" },
-          "telephone": "+37126588885",
-          "email": "a.barkans@mexa.lv",
-          "areaServed": ["Latvia", "Lithuania", "Estonia"],
-          "foundingDate": "2001",
+          "name": "EcoAgroForest SIA",
+          "description": "Organominerālo mēslošanas līdzekļu ražotājs Latvijā — produkti izgatavoti no mežsaimniecības blakusproduktiem sadarbībā ar KKI.",
+          "address": { "@type": "PostalAddress", "streetAddress": "Mārkalnes iela 20", "addressLocality": "Rīga", "postalCode": "LV-1024", "addressCountry": "LV" },
+          "telephone": "+37125148850",
+          "email": "inagroforest@gmail.com",
+          "areaServed": ["Latvia"],
+          "foundingDate": "2010",
         },
         {
           "@type": "FAQPage",
@@ -215,10 +203,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (EAF.slides.length <= 1) return;
     const t = setInterval(() => {
       setFadeIn(false);
       setTimeout(() => {
-        setSlide((s) => (s + 1) % MEXA.slides.length);
+        setSlide((s) => (s + 1) % EAF.slides.length);
         setFadeIn(true);
       }, 300);
     }, 4000);
@@ -227,14 +216,25 @@ export default function App() {
 
   const prevSlide = () => {
     setFadeIn(false);
-    setTimeout(() => { setSlide((s) => (s - 1 + MEXA.slides.length) % MEXA.slides.length); setFadeIn(true); }, 200);
+    setTimeout(() => { setSlide((s) => (s - 1 + EAF.slides.length) % EAF.slides.length); setFadeIn(true); }, 200);
   };
   const nextSlide = () => {
     setFadeIn(false);
-    setTimeout(() => { setSlide((s) => (s + 1) % MEXA.slides.length); setFadeIn(true); }, 200);
+    setTimeout(() => { setSlide((s) => (s + 1) % EAF.slides.length); setFadeIn(true); }, 200);
   };
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  const scrollTeased = useRef(false);
+  useEffect(() => {
+    if (scrollTeased.current) return;
+    scrollTeased.current = true;
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 120, behavior: "smooth" });
+      setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, 600);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="font-['Plus_Jakarta_Sans',sans-serif]">
@@ -250,120 +250,131 @@ export default function App() {
       {/* ══════════════════════════════════════════════════════
           SECTION 1 — CLICKSSCALE DEMO FRAME
       ══════════════════════════════════════════════════════ */}
-      <section className="bg-white min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-          <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <img src={CS_LOGO} alt="ClicksScale" className="h-10 object-contain" />
-              <div className="hidden sm:flex flex-col justify-center leading-tight">
-                <p className="text-[13px] font-semibold text-gray-800">Tīmekļa izstrādes &amp;</p>
-                <p className="text-[13px] font-semibold text-gray-800">digitālā mārketinga aģentūra</p>
+      <section className="min-h-screen flex flex-col font-body" style={{ background: 'linear-gradient(135deg, #0238F4 0%, #7A1DF2 45%, #00D6C9 100%)' }}>
+        <header className="sticky top-0 z-50">
+          <div className="max-w-5xl mx-auto px-4 pt-4">
+            <div className="bg-white/90 backdrop-blur-xl rounded-full shadow-xl border border-white/50 px-6 py-2.5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <img src={CS_LOGO} alt="ClicksScale" className="h-8 object-contain" />
+                <div className="hidden sm:flex flex-col justify-center leading-tight">
+                  <p className="text-[11px] font-semibold text-gray-600">Tīmekļa izstrādes &amp;</p>
+                  <p className="text-[11px] font-semibold text-gray-600">digitālā mārketinga aģentūra</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <a href="https://clickscale.agency/lv/veiksmes-stasti" target="_blank" rel="noopener noreferrer"
-                className="text-sm font-semibold text-blue-600 hover:text-white hover:bg-blue-600 border border-blue-200 hover:border-blue-600 px-4 py-1.5 rounded-lg transition-all duration-200 hidden sm:block whitespace-nowrap">
-                Apskati mūsu citus klientus
-              </a>
-              <span className="bg-blue-50 border border-blue-100 text-blue-700 text-[11px] font-semibold px-3 py-1 rounded-full">
-                Demo lapa
-              </span>
+              <div className="flex items-center gap-3">
+                <a href="https://clickscale.agency/lv/veiksmes-stasti" target="_blank" rel="noopener noreferrer"
+                  className="text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-100 px-4 py-1.5 rounded-full transition-all duration-200 hidden sm:block whitespace-nowrap">
+                  Apskati mūsu citus klientus
+                </a>
+              </div>
             </div>
           </div>
         </header>
 
         <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-16">
-          {/* Intro */}
-          <div className="max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
-              </span>
-              Personalizēta demonstrācija — MEXA
+          <div className="flex flex-row items-center justify-center gap-8 mb-8">
+            <div className="flex items-center gap-3">
+              <img src={EAF.logo} alt="EcoAgroForest" className="object-contain drop-shadow-lg" style={{ width: '160px', height: '160px' }} />
             </div>
-            <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1] mb-4">
-              Mēs izveidojām šo lapu<br />
-              <span className="text-blue-600">speciāli priekš jums</span>
-            </h1>
-            <p className="text-lg text-gray-400 mb-10">
-              Zemāk redzat, ko mēs pamanījām jūsu mājaslapā — un ko mēs izveidojām.
-            </p>
+            <div className="inline-flex items-center gap-2 bg-white/15 border border-white/20 text-sm font-medium px-4 py-2 rounded-full text-highlight">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-highlight" />
+              </span>
+              Personalizēta demonstrācija — EcoAgroForest SIA
+            </div>
           </div>
 
-          {/* Audit cards */}
-          <div className="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
+          <div className="max-w-2xl mx-auto flex flex-col items-center gap-8">
+            <h1 className="text-5xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+              Mēs izveidojām šo lapu<br />
+              <span className="text-cyan-300">speciāli priekš jums</span>
+            </h1>
+            <button
+              onClick={() => scrollTo("eaf")}
+              className="inline-flex items-center gap-2 bg-highlight text-highlight-foreground font-bold px-8 py-4 rounded-lg shadow-glow-yellow hover:shadow-glow-yellow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-pointer text-lg"
+            >
+              SKATĪT DEMO LAPU ZEMĀK <span className="inline-block animate-chevron-bounce"><ChevronDown /></span>
+            </button>
+            <p className="text-xs text-white/50">Bezmaksas demonstrācija · Nav saistošu pienākumu</p>
+          </div>
+
+          {/* Glassmorphism audit cards */}
+          <div className="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-left mt-10 mb-10">
             {/* Before */}
-            <div className="border border-red-100 rounded-2xl overflow-hidden">
-              <div className="bg-red-50 px-6 py-4 flex items-center justify-between">
+            <div className="border-2 border-highlight rounded-2xl overflow-hidden bg-white/10 backdrop-blur-xl">
+              <div className="bg-white/15 backdrop-blur-sm px-6 py-4 flex items-center justify-between border-b border-white/10">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-red-400 mb-0.5">Ko mēs pamanījām</p>
-                  <p className="text-sm font-semibold text-gray-700">Vecā mājaslapa</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] mb-0.5 text-highlight">Ko mēs pamanījām</p>
+                  <p className="text-sm font-semibold text-white">Digitālā klātbūtne</p>
                 </div>
-                <span className="bg-white border border-red-100 text-red-500 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg">
-                  {AUDIT.domain}
-                </span>
+                <span className="bg-red-500 text-black text-[11px] font-bold px-3 py-1 rounded-full">nav mājaslapas</span>
               </div>
               <div className="px-6 py-5 space-y-3">
                 {AUDIT.problems.map((p) => (
                   <div key={p} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center text-red-500 text-xs font-bold">✕</span>
-                    <span className="text-sm text-gray-600">{p}</span>
+                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 text-xs font-bold">✕</span>
+                    <span className="text-sm text-white">{p}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* After */}
-            <div className="border border-blue-100 rounded-2xl overflow-hidden">
-              <div className="bg-blue-50 px-6 py-4 flex items-center justify-between">
+            <div className="border-2 border-highlight rounded-2xl overflow-hidden bg-white/10 backdrop-blur-xl">
+              <div className="bg-white/15 backdrop-blur-sm px-6 py-4 flex items-center justify-between border-b border-white/10">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-blue-400 mb-0.5">Ko mēs izveidojām</p>
-                  <p className="text-sm font-semibold text-gray-700">Jaunā versija priekš jums</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-highlight mb-0.5">Ko mēs izveidojām</p>
+                  <p className="text-sm font-semibold text-white">Jaunā versija priekš jums</p>
                 </div>
-                <span className="bg-white border border-blue-100 text-blue-500 text-[11px] font-semibold px-2.5 py-1 rounded-lg">
-                  {AUDIT.timeTag}
-                </span>
+                <span className="text-highlight-foreground text-[11px] font-bold px-3 py-1 rounded-full bg-lime-500">Demo lapa</span>
               </div>
               <div className="px-6 py-5 space-y-3">
                 {AUDIT.gains.map((g) => (
                   <div key={g} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 text-xs font-bold">✓</span>
-                    <span className="text-sm text-gray-600">{g}</span>
+                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-300 text-xs font-bold">✓</span>
+                    <span className="text-sm text-white">{g}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* CTA */}
-          <button
-            onClick={() => scrollTo("mexa")}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer text-lg"
-          >
-            Skatīt demonstrāciju <ChevronDown />
-          </button>
-          <p className="mt-5 text-xs text-gray-400">Bezmaksas demonstrācija · Nav saistošu pienākumu</p>
         </div>
       </section>
 
+      {/* Ticker 1 — ŠEIT SĀKAS */}
+      <div>
+        <div className="warning-stripes" />
+        <div style={{ backgroundColor: '#C8FF24' }} className="overflow-hidden whitespace-nowrap py-1">
+          <div className="inline-block animate-marquee">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <span key={i} className="inline-block px-6 text-sm font-bold uppercase tracking-[0.1em]" style={{ fontFamily: "'Orbitron', sans-serif", color: '#000000' }}>
+                ŠEIT SĀKAS JŪSU DEMO LAPA
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="warning-stripes" />
+      </div>
+
       {/* ══════════════════════════════════════════════════════
-          SECTION 2 — MEXA SHOWCASE
+          SECTION 2 — ECOAGROFOREST SHOWCASE
       ══════════════════════════════════════════════════════ */}
-      <div id="mexa">
+      <div id="eaf">
 
         {/* Sticky wrapper — banner + nav stick together */}
         <div className="sticky top-0 z-40">
 
         {/* Announcement bar */}
         {showBanner && (
-          <div style={{ backgroundColor: MEXA.green }} className="relative flex items-center justify-center px-6 py-2 text-white text-sm font-semibold">
-            <span className="mr-3">MEXA katalogs</span>
+          <div style={{ backgroundColor: EAF.green }} className="relative flex items-center justify-center px-6 py-2 text-white text-sm font-semibold">
+            <span className="mr-3">EcoAgroForest — Organominerālie mēsli no meža atlikumiem</span>
             <button
               onClick={demoToast}
               className="bg-white/20 hover:bg-white/30 border border-white/40 text-white text-xs font-bold px-3 py-0.5 rounded transition-colors cursor-pointer"
             >
-              Skatīt!
+              Sazināties!
             </button>
             <button
               onClick={() => setShowBanner(false)}
@@ -375,9 +386,21 @@ export default function App() {
         )}
 
         {/* Nav */}
-        <nav style={{ backgroundColor: MEXA.greenDark }}>
+        <nav style={{ backgroundColor: EAF.greenDark }}>
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-            <img src={MEXA.logo} alt="MEXA" className="h-12 py-1 object-contain" />
+            <div className="flex items-center gap-2 py-2.5">
+              {/* Two pine trees — small + large */}
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-5 text-green-400 flex-shrink-0">
+                <path d="M12 3L5 19h14L12 3z"/><rect x="10.5" y="18" width="3" height="3" fill="currentColor" opacity="0.7"/>
+              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-6 text-green-300 flex-shrink-0 -ml-1">
+                <path d="M12 1L3 20h18L12 1z"/><rect x="10.5" y="19" width="3" height="3" fill="currentColor" opacity="0.7"/>
+              </svg>
+              <div className="ml-1">
+                <p className="text-white text-sm font-extrabold leading-none tracking-tight">EcoAgroForest</p>
+                <p className="text-green-300/70 text-[9px] leading-none mt-0.5 font-medium uppercase tracking-wide">SIA</p>
+              </div>
+            </div>
             <div className="hidden md:flex items-center">
               {NAV_ITEMS.map(({ label, sub }) => (
                 sub.length > 0 ? (
@@ -408,120 +431,165 @@ export default function App() {
         </nav>
         </div>{/* end sticky wrapper */}
 
-        {/* Hero Slider */}
+        {/* Hero — single image, no slider controls */}
         <div className="px-4 sm:px-6 pt-4 pb-2">
           <div className="relative overflow-hidden bg-gray-900 rounded-2xl" style={{ height: "520px" }}>
             <img
-              src={MEXA.slides[slide]}
-              alt="MEXA"
+              src={EAF.slides[slide]}
+              alt="EcoAgroForest"
               className={`w-full h-full object-cover transition-opacity duration-300 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             />
-            {/* Green left overlay where text sits */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0d2b1a]/85 via-[#0d2b1a]/40 to-transparent" />
+            {/* Deep forest left overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0d260d]/85 via-[#0d260d]/40 to-transparent" />
             {/* Dark bottom vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute inset-0 flex items-end pb-10">
               <div className="max-w-7xl mx-auto px-8 w-full">
                 <p className="text-white/90 text-sm font-semibold uppercase tracking-[0.2em] mb-2">
-                  GSI (ASV) Oficiālais Pārstāvis Baltijā
+                  No meža atlikumiem — līdz auglīgākai augsnei
                 </p>
                 <h2 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-5 max-w-xl">
-                  Mēs pārstāvam jūsu intereses —<br />
-                  <span style={{ color: "#28b358" }}>graudu tehnoloģiju eksperti</span>
+                  Meža gudrība —<br />
+                  <span style={{ color: "#4fc46a" }}>jūsu laukā</span>
                 </h2>
                 <button
                   onClick={() => scrollTo("products")}
-                  style={{ backgroundColor: MEXA.green }}
+                  style={{ backgroundColor: EAF.green }}
                   className="inline-flex items-center gap-2 text-white font-bold px-7 py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer shadow-lg"
                 >
                   Skatīt produktus <ArrowRight />
                 </button>
               </div>
             </div>
-            <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
-              <ChevronLeft />
-            </button>
-            <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
-              <ChevronRight />
-            </button>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-              {MEXA.slides.map((_, i) => (
-                <button key={i} onClick={() => setSlide(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${i === slide ? "bg-white scale-125" : "bg-white/50"}`} />
-              ))}
-            </div>
+            {/* Slider dots — only if multiple slides */}
+            {EAF.slides.length > 1 && (
+              <>
+                <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
+                  <ChevronLeft />
+                </button>
+                <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors cursor-pointer">
+                  <ChevronRight />
+                </button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {EAF.slides.map((_, i) => (
+                    <button key={i} onClick={() => setSlide(i)}
+                      className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${i === slide ? "bg-white scale-125" : "bg-white/50"}`} />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
         {/* About */}
         <div className="bg-white py-10 px-6 border-b border-gray-100">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 items-center">
-            <img src={MEXA.products.hero} alt="MEXA" className="w-full md:w-72 object-contain rounded-lg shadow-md flex-shrink-0" />
+            {/* IMAGE PLACEHOLDER — generate: lush green forest floor with sunlight filtering through trees, rich dark soil visible, professional nature photography */}
+            <div className="w-full md:w-72 h-52 rounded-lg shadow-md flex-shrink-0 bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-center px-4">
+              <span className="text-3xl mb-2">🖼️</span>
+              <p className="text-[10px] text-gray-400 leading-tight">PLACEHOLDER: Meža grīda ar saknēm un auglīgu augsni, profesionāla dabas fotogrāfija</p>
+            </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: MEXA.green }}>Par mums</p>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>Par mums</p>
               <h3 className="text-2xl font-extrabold text-gray-900 mb-4 leading-tight">
-                MEXA ir uzņēmums, kas vairāk nekā 20 gadus darbojas lauksaimniecībā, nodrošinot pilna cikla graudu apstrādes risinājumus Baltijas valstīs.
+                No meža atlikumiem — uz ilgtspējīgas lauksaimniecības.
               </h3>
-              <p className="text-gray-500 leading-relaxed mb-4">
-                No 2001. gada uzņēmums aktīvi iesaistās graudu primārās apstrādes kompleksu projektēšanā, biznesa procesu pilnveidošanā, graudu primārās apstrādes procesā — graudu transportēšanā, kaltēšanā, uzglabāšanā.
+              <p className="text-gray-500 leading-relaxed mb-3">
+                EcoAgroForest SIA mežsaimniecības procesā iegūtās izejvielas un blakusproduktus izmanto ilgtspējīgi — bezatlikumu ciklā. Koksnes pelni, lignīns, mizas un organiskās frakcijas kļūst par pamatu bioloģiski aktīviem organominerālajiem mēslošanas līdzekļiem.
               </p>
-              <p className="font-bold text-sm" style={{ color: MEXA.green }}>
-                TAGAD ESAM AR "Izstāžu kompleksa RĀMAVA" Ķekavos novada Valdlaucos
+              <p className="text-gray-500 leading-relaxed mb-4">
+                Sadarbībā ar <span className="font-semibold text-gray-700">Latvijas Valsts koksnes ķīmijas institūtu (KKI)</span> izstrādājam zinātniski pamatotus produktus, kas uzlabo augsnes kvalitāti, veicina augu augšanu un samazina nepieciešamību pēc sintētiskajiem ķimikālijiem.
+              </p>
+              <p className="font-bold text-sm" style={{ color: EAF.green }}>
+                Rīga, Mārkalnes iela 20 · +371 25148850 · inagroforest@gmail.com
               </p>
             </div>
           </div>
         </div>
 
-        {/* Red seasonal bar */}
-        <div className="bg-red-600 py-4 px-6">
+        {/* Green accent bar */}
+        <div style={{ backgroundColor: EAF.greenDark }} className="py-4 px-6">
           <h3 className="text-white text-xl font-extrabold uppercase tracking-wider text-center">
-            Sezonas Piedāvājums
+            Ražots no meža — domāts laukam · Zinātniski pamatots · Pieejams visā Latvijā
           </h3>
         </div>
 
-        {/* Products — side by side */}
+        {/* Products */}
         <div id="products" className="bg-gray-50 py-16 px-6">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                tag: "GSI T-sērija (ASV)",
-                title: "Mobila graudu kalte T232",
-                img: MEXA.products.mobile,
-                specs: ["Ražīgums: pēc pieprasījuma", "Degšanas tips: propāna gāze", "Kafle ar daudziem: JUMBO", "Kafle ar daudziem: 5,5 T"],
-                price: "EUR 3 000–5 000 + PVN",
-              },
-              {
-                tag: "GSI 2100-sērija (ASV)",
-                title: "Stacionārā graudu kalte 2100",
-                img: MEXA.products.stationary,
-                specs: ["Ražīgums: 51,2 t/h", "Degšanas tips: propāna gāze", "Kafle ar daudziem: Stacionary 2100", "Kafle: 5 kārtas kolonna"],
-                price: "EUR 15 000–30 000 + PVN",
-              },
-            ].map((p) => (
-              <div key={p.title} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="bg-white p-6 flex items-center justify-center h-56">
-                  <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain rounded-xl" />
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>Produkti</p>
+              <h3 className="text-3xl font-extrabold text-gray-900">Organominerālie mēslošanas līdzekļi</h3>
+              <p className="text-gray-400 text-sm mt-2 max-w-xl mx-auto">Izgatavoti no mežsaimniecības blakusproduktiem · Zinātniski pamatoti sadarbībā ar KKI · Piemēroti bioloģiskajai un konvencionālajai lauksaimniecībai</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  tag: "Pamatmēslojums",
+                  title: "OrgoForest Granula",
+                  imgNote: "PLACEHOLDER: Close-up of dark rich organic fertilizer granules on wooden surface, moody natural lighting, product photography",
+                  specs: ["Koksnes pelni + lignīna savienojumi", "N-P-K + mikroelementi", "Graudaugi, rapsis, dārzeņi", "Lietošana: pavasarī pirms sējas"],
+                  badge: "Vispieprasītākais",
+                },
+                {
+                  tag: "Augšanas stimulants",
+                  title: "OrgoForest Aktīvs",
+                  imgNote: "PLACEHOLDER: Young seedlings sprouting from dark soil with roots visible, macro photography, green and brown tones",
+                  specs: ["Koksnes ekstraktu bioaktīvie savienojumi", "Stimulē dīgšanu un sakņu augšanu", "Palielina stresa izturību", "Lietošana: lapu apstrāde vai laistīšana"],
+                  badge: "KKI formula",
+                },
+                {
+                  tag: "Augsnes kondicionieris",
+                  title: "OrgoForest Augsne",
+                  imgNote: "PLACEHOLDER: Hands holding rich dark humus soil with visible organic matter, warm natural light, agricultural photography",
+                  specs: ["Humīnskābes no koksnes biomasas", "Uzlabo ūdens aizturi un struktūru", "Aktivizē augsnes mikrobioma", "Lietošana: rudenī vai pavasarī"],
+                  badge: "Ilgtermiņa efekts",
+                },
+              ].map((p) => (
+                <div key={p.title} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                  {/* Image placeholder */}
+                  <div className="bg-gray-100 border-b border-dashed border-gray-300 flex flex-col items-center justify-center h-44 px-4 text-center">
+                    <span className="text-2xl mb-1">🖼️</span>
+                    <p className="text-[9px] text-gray-400 leading-tight">{p.imgNote}</p>
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-bold uppercase tracking-[0.12em]" style={{ color: EAF.green }}>{p.tag}</p>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: EAF.greenDark }}>{p.badge}</span>
+                    </div>
+                    <h4 className="text-base font-extrabold text-gray-900 mb-3">{p.title}</h4>
+                    <ul className="space-y-1.5 mb-4">
+                      {p.specs.map((s) => (
+                        <li key={s} className="flex items-start gap-2 text-xs text-gray-600">
+                          <span className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: EAF.green + "22", color: EAF.green }}>
+                            <Check />
+                          </span>
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                    <button onClick={demoToast} style={{ backgroundColor: EAF.green }} className="w-full text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity cursor-pointer text-sm">
+                      Pieprasīt piedāvājumu
+                    </button>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] mb-1" style={{ color: MEXA.green }}>{p.tag}</p>
-                  <h4 className="text-lg font-extrabold text-gray-900 mb-3">{p.title}</h4>
-                  <ul className="space-y-1.5 mb-5">
-                    {p.specs.map((s) => (
-                      <li key={s} className="flex items-center gap-2 text-sm text-gray-600">
-                        <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: MEXA.green + "22", color: MEXA.green }}>
-                          <Check />
-                        </span>
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="text-sm font-semibold text-gray-500 mb-4">Cena: {p.price}</div>
-                  <button onClick={demoToast} style={{ backgroundColor: MEXA.green }} className="w-full text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity cursor-pointer text-sm">
-                    Pieteikt konsultāciju
-                  </button>
-                </div>
+              ))}
+            </div>
+
+            {/* KKI partnership strip */}
+            <div className="mt-10 border border-green-200 rounded-2xl p-6 bg-green-50 flex flex-col sm:flex-row items-center gap-5">
+              <div className="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 text-2xl">🔬</div>
+              <div className="flex-1 text-center sm:text-left">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] mb-1" style={{ color: EAF.green }}>Zinātniskie partneri</p>
+                <p className="text-sm font-extrabold text-gray-900 mb-1">Latvijas Valsts koksnes ķīmijas institūts (KKI)</p>
+                <p className="text-xs text-gray-500 leading-relaxed">KKI pētnieki izstrādājuši metodes koksnes ekstraktu pārvēršanai augšanas stimulantos, augsnes sorbentās un organominerālo savienojumos. Mūsu produktu formulas balstās uz šiem atklājumiem.</p>
               </div>
-            ))}
+              <a href="https://kki.lv" target="_blank" rel="noopener noreferrer" onClick={demoToast}
+                className="flex-shrink-0 text-xs font-bold px-4 py-2 rounded-lg border-2 cursor-pointer transition-colors"
+                style={{ borderColor: EAF.green, color: EAF.green }}>
+                kki.lv →
+              </a>
+            </div>
           </div>
         </div>
 
@@ -529,7 +597,7 @@ export default function App() {
         <div className="bg-white py-16 px-6 border-t border-gray-100">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: MEXA.green }}>Atsauksmes</p>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>Atsauksmes</p>
               <h3 className="text-3xl font-extrabold text-gray-900">Ko saka mūsu klienti</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -547,18 +615,27 @@ export default function App() {
           </div>
         </div>
 
-        {/* Coolers */}
-        <div className="bg-white py-16 px-6">
+        {/* Services grid */}
+        <div className="bg-white py-16 px-6 border-t border-gray-100">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: MEXA.green }}>SILDĪTĀJI</p>
-              <h3 className="text-3xl font-extrabold text-gray-900">Graudu sildīšanas risinājumi</h3>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>Kā tas strādā</p>
+              <h3 className="text-3xl font-extrabold text-gray-900">No meža — uz lauku</h3>
+              <p className="text-gray-400 text-sm mt-2 max-w-lg mx-auto">Cirkulārais cikls, kas pārvērš mežizstrādes blakusproduktus augstvērtīgā lauksaimniecības resursos</p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {MEXA.coolers.map((c) => (
-                <div key={c.name} className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center text-center hover:border-green-300 hover:shadow-sm transition-all duration-200 cursor-pointer group">
-                  <img src={c.img} alt={c.name} className="h-20 w-full object-contain mb-3 group-hover:scale-105 transition-transform duration-200" />
-                  <p className="text-xs font-medium text-gray-600 leading-tight">{c.name}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {SERVICES.map(({ emoji, name, desc }) => (
+                <div
+                  key={name}
+                  onClick={demoToast}
+                  className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col items-center text-center hover:border-green-300 hover:shadow-sm transition-all duration-200 cursor-pointer group"
+                >
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 text-2xl group-hover:scale-110 transition-transform duration-200"
+                    style={{ backgroundColor: EAF.green + "18" }}>
+                    {emoji}
+                  </div>
+                  <p className="text-sm font-bold text-gray-900 mb-1 leading-tight">{name}</p>
+                  <p className="text-[11px] text-gray-400 leading-tight">{desc}</p>
                 </div>
               ))}
             </div>
@@ -566,22 +643,27 @@ export default function App() {
         </div>
 
         {/* Stats */}
-        <div style={{ backgroundColor: MEXA.green }} className="py-10 px-6">
+        <div style={{ backgroundColor: EAF.green }} className="py-10 px-6">
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[{ n: "2001", l: "Dibināšanas gads" }, { n: "23+", l: "Gadi pieredzē" }, { n: "GSI", l: "ASV sertifikāts" }, { n: "3", l: "Baltijas valstis" }].map((s) => (
+            {[
+              { n: "3", l: "Produktu veidi" },
+              { n: "100%", l: "Dabiskas izejvielas" },
+              { n: "KKI", l: "Zinātniskie partneri" },
+              { n: "Latvija", l: "Piegāde visā valstī" },
+            ].map((s) => (
               <div key={s.l}>
-                <div className="text-4xl font-extrabold text-white mb-1">{s.n}</div>
+                <div className="text-3xl font-extrabold text-white mb-1">{s.n}</div>
                 <div className="text-green-100 text-sm">{s.l}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* BUJ — Bieži Uzdotie Jautājumi */}
+        {/* BUJ */}
         <div className="bg-white py-16 px-6 border-t border-gray-100">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: MEXA.green }}>BUJ</p>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>BUJ</p>
               <h3 className="text-3xl font-extrabold text-gray-900">Bieži uzdotie jautājumi</h3>
             </div>
             <div className="space-y-3">
@@ -611,17 +693,19 @@ export default function App() {
         <div id="kontakti" className="bg-gray-50 py-16 px-6">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div>
-              <img src={MEXA.logo} alt="MEXA" className="h-14 object-contain mb-6" />
-              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: MEXA.green }}>Sazināties</p>
+              <div className="mb-6">
+                <img src={EAF.logo} alt="EcoAgroForest" className="h-24 object-contain" />
+              </div>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: EAF.green }}>Sazināties</p>
               <h3 className="text-2xl font-extrabold text-gray-900 mb-6">Kontakti</h3>
               <div className="space-y-4">
                 {[
-                  { icon: <MapPin />, text: "Tirgoņu iela 4a, Cēsis, LV-4101" },
-                  { icon: <Phone />, text: "+371 26 588 885 · +371 29 276 699" },
-                  { icon: <Mail />, text: "a.barkans@mexa.lv · eriksdainis@mexa.lv" },
+                  { icon: <MapPin />, text: "Mārkalnes iela 20, Rīga, LV-1024" },
+                  { icon: <Phone />, text: "+371 25148850" },
+                  { icon: <Mail />, text: "inagroforest@gmail.com" },
                 ].map(({ icon, text }) => (
                   <div key={text} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex-shrink-0" style={{ color: MEXA.green }}>{icon}</span>
+                    <span className="mt-0.5 flex-shrink-0" style={{ color: EAF.green }}>{icon}</span>
                     <span className="text-gray-600 text-sm">{text}</span>
                   </div>
                 ))}
@@ -633,7 +717,7 @@ export default function App() {
                 <input type="text" placeholder="Jūsu vārds" className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-400 transition-colors" />
                 <input type="email" placeholder="E-pasta adrese" className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-400 transition-colors" />
                 <textarea placeholder="Jūsu ziņojums" rows={4} className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-green-400 transition-colors resize-none" />
-                <button onClick={demoToast} style={{ backgroundColor: MEXA.green }} className="w-full text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer">
+                <button onClick={demoToast} style={{ backgroundColor: EAF.green }} className="w-full text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity cursor-pointer">
                   Nosūtīt
                 </button>
               </div>
@@ -641,71 +725,86 @@ export default function App() {
           </div>
         </div>
 
-        {/* MEXA footer */}
-        <div className="bg-[#3a3a3a] py-10 px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-            {/* Logo + addresses */}
-            <div className="md:col-span-2">
-              <img src={MEXA.logo} alt="MEXA" className="h-12 object-contain mb-5 brightness-0 invert opacity-90" />
+        {/* EcoAgroForest footer */}
+        <div className="bg-[#2d3a2d] py-10 px-6">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            {/* Logo + address */}
+            <div>
+              <div className="mb-4">
+                <img src={EAF.logo} alt="EcoAgroForest" className="h-16 object-contain drop-shadow-lg" />
+              </div>
               <div className="text-gray-300 text-xs leading-relaxed space-y-0.5">
-                <p className="font-bold text-white mb-2">MEXA, SIA</p>
-                <p>Rīga, Vienības gatve 38a</p>
-                <p>Cēsis, Tirgoņu iela 4a</p>
-                <p>Valdlauči "Izstāžu komplekss RĀMAVA",</p>
-                <p>Ķekavas novads</p>
-                <p className="mt-2">Tālrunis: <span className="text-white">+371 64161740</span></p>
+                <p className="font-bold text-white mb-1">EcoAgroForest SIA</p>
+                <p>Mārkalnes iela 20, Rīga, LV-1024</p>
               </div>
             </div>
-            {/* Valdes priekšsēdētājs */}
+            {/* Kontakti */}
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-3">Valdes priekšsēdētājs</p>
-              <p className="text-white font-semibold text-sm mb-3">Ainārs Barkāns</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-3">Kontakti</p>
               <div className="text-gray-300 text-xs space-y-1">
-                <p>Tālrunis: <span className="text-white">+371 26588885</span></p>
-                <p>E-pasts: <a href="mailto:a.barkans@mexa.lv" className="text-green-400 hover:text-green-300">a.barkans@mexa.lv</a></p>
+                <p>Tālrunis: <span className="text-white">+371 25148850</span></p>
+                <p>E-pasts: <a href="mailto:inagroforest@gmail.com" className="text-green-400 hover:text-green-300">inagroforest@gmail.com</a></p>
               </div>
             </div>
-            {/* Komercdirektors */}
+            {/* Produkti */}
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-3">Komercdirektors</p>
-              <p className="text-white font-semibold text-sm mb-3">Ēriks Dainis</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-3">Produkti</p>
               <div className="text-gray-300 text-xs space-y-1">
-                <p>Tālrunis: <span className="text-white">+371 29276699</span></p>
-                <p>E-pasts: <a href="mailto:eriksdainis@mexa.lv" className="text-green-400 hover:text-green-300">eriksdainis@mexa.lv</a></p>
+                <p className="text-white font-semibold">🌿 OrgoForest Granula</p>
+                <p>Organominerālais pamatmēslojums</p>
+                <p className="text-white font-semibold mt-2">💧 OrgoForest Aktīvs</p>
+                <p>Bioaktīvais augu augšanas stimulants</p>
+                <p className="text-white font-semibold mt-2">🌱 OrgoForest Augsne</p>
+                <p>Augsnes kondicionieris un struktūras uzlabotājs</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Gradient bleed — dark footer → white */}
-      <div className="h-16 bg-gradient-to-b from-[#3a3a3a] to-white" />
+      {/* Ticker 2 — ŠEIT BEIDZAS */}
+      <div>
+        <div className="warning-stripes" />
+        <div style={{ backgroundColor: '#C8FF24' }} className="overflow-hidden whitespace-nowrap py-1">
+          <div className="inline-block animate-marquee">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <span key={i} className="inline-block px-6 text-sm font-bold uppercase tracking-[0.1em]" style={{ fontFamily: "'Orbitron', sans-serif", color: '#000000' }}>
+                ŠEIT BEIDZAS JŪSU DEMO LAPA
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="warning-stripes" />
+      </div>
 
-      {/* ── Ghostly audit teaser — first thing after MEXA footer ── */}
+      {/* Gradient bleed — dark footer → white */}
+      <div className="h-16 bg-gradient-to-b from-[#2d3a2d] to-white" />
+
+      {/* ── Ghostly audit teaser ── */}
       <div className="bg-white py-16 px-6">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-6">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">Papildus informācija</p>
-            <h3 className="text-xl font-extrabold text-gray-800">Vēlies apskatīt pilnu vecās lapas auditu?</h3>
-            <p className="text-sm text-gray-400 mt-1">Mēs veicām pilnu {AUDIT.domain} tehnisko analīzi. Šeit ir tās pārskata kopsavilkums.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">Digitālā klātbūtne</p>
+            <h3 className="text-xl font-extrabold text-gray-800">Vēlies apskatīt pilnu digitālās klātbūtnes auditu?</h3>
+            <p className="text-sm text-gray-400 mt-1">Mēs veicām pilnu EcoAgroForest digitālās klātbūtnes analīzi. Šeit ir tās pārskata kopsavilkums.</p>
           </div>
 
           <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-2xl">
             <div className="pointer-events-none select-none">
               <div className="bg-gray-900 px-5 py-4 flex items-center justify-between">
                 <div>
-                  <p className="text-white font-bold text-sm">Tehniski-vizuālais audits — {AUDIT.domain}</p>
+                  <p className="text-white font-bold text-sm">Digitālās klātbūtnes audits — EcoAgroForest SIA</p>
                   <p className="text-gray-400 text-xs mt-0.5">Ģenerēts: 09.04.2026 · ClicksScale analīze</p>
                 </div>
                 <span className="bg-red-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">Kritisks</span>
               </div>
               <div className="bg-white px-5 py-5 flex justify-around border-b border-gray-100">
                 {[
-                  { l: "SEO", s: 2, ring: "border-red-500", text: "text-red-600" },
-                  { l: "Ātrums", s: 3, ring: "border-orange-400", text: "text-orange-500" },
-                  { l: "Mobilais", s: 1, ring: "border-red-600", text: "text-red-700" },
+                  { l: "SEO", s: 0, ring: "border-red-700", text: "text-red-800" },
+                  { l: "Ātrums", s: 0, ring: "border-red-700", text: "text-red-800" },
+                  { l: "Mobilais", s: 0, ring: "border-red-700", text: "text-red-800" },
                   { l: "Drošība", s: 0, ring: "border-red-700", text: "text-red-800" },
-                  { l: "Dizains", s: 2, ring: "border-red-500", text: "text-red-600" },
+                  { l: "Dizains", s: 0, ring: "border-red-700", text: "text-red-800" },
                 ].map(({ l, s, ring, text }) => (
                   <div key={l} className="flex flex-col items-center gap-1.5">
                     <div className={`w-14 h-14 rounded-full border-[3px] ${ring} flex items-center justify-center bg-white shadow-sm`}>
@@ -719,15 +818,15 @@ export default function App() {
                 <div className="px-5 pt-4 pb-2 border-b border-gray-100">
                   <p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-red-500 mb-3">❌ Kritiskie trūkumi (6)</p>
                   <div className="space-y-2.5">
-                    {["SSL sertifikāts nav instalēts — visa vietne darbojas nedrošā http:// protokolā","Mobilā versija nav pielāgota — viewport nav konfigurēts nevienā lapā","Lapas ielādes laiks: 8.3 sek. (nozares standarts: <2.5 sek.)","47 bojātas iekšējās saites — 404 kļūda","Alt teksti trūkst 94% no 167 attēliem — Google tos neredz","Google Search Console: 0% lapas ir indeksētas meklētājā"].map((t) => (
+                    {["Nav aktīvas mājaslapas — uzņēmums nav atrodams Google meklēšanā","Nulles organiskais meklēšanas trafiks — nav indexētu lapu","Konkurenti ar mājaslapa saņem jūsu potenciālos klientus","Nav kontaktformas — pieprasījumi ārpus darba laika tiek zaudēti","Google Business profils nav optimizēts","Schema.org strukturētie dati nav ieviesti — AI meklētāji nezina par uzņēmumu"].map((t) => (
                       <div key={t} className="flex items-start gap-2.5 text-xs text-gray-700"><span className="text-red-500 flex-shrink-0 mt-0.5">✕</span><span>{t}</span></div>
                     ))}
                   </div>
                 </div>
                 <div className="px-5 pt-4 pb-2 border-b border-gray-100">
-                  <p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-orange-500 mb-3">⚠ Brīdinājumi (5)</p>
+                  <p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-orange-500 mb-3">⚠ Iespējas (5)</p>
                   <div className="space-y-2.5">
-                    {["Meta apraksti trūkst 78% lapām — slikta Google redzamība","Schema.org strukturētie dati nav ieviesti","Attēli nav optimizēti — kopējais svars 14.2 MB (norm: <1 MB)","Konkurenti meha.lv, graudi.lv ar 3–4× augstāku Google pozicionēšanu","Core Web Vitals: LCP 9.1s · FID 820ms · CLS 0.41 — visi FAILED"].map((t) => (
+                    {["Organominerālie mēsli no vietējiem izejmateriāliem — augošs pieprasījums ilgtspējīgā lauksaimniecībā","KKI zinātniskie pētījumi kā konkurences priekšrocība — vēl neviens cits šo nestāsta digitāli","Google Ads var sniegt tūlītēju redzamību lauksaimnieku auditorijā","Tiešsaistes pasūtīšana — iespēja pieņemt pieprasījumus 24/7 no visas Latvijas","Bioloģiskās lauksaimniecības operators meklē alternatīvus mēslus — jūsu produkts ir atbilde"].map((t) => (
                       <div key={t} className="flex items-start gap-2.5 text-xs text-gray-700"><span className="text-orange-400 flex-shrink-0 mt-0.5">▲</span><span>{t}</span></div>
                     ))}
                   </div>
@@ -735,9 +834,13 @@ export default function App() {
                 <div className="px-5 pt-4 pb-2 border-b border-gray-100">
                   <p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-gray-400 mb-3">Konkurentu salīdzinājums</p>
                   <div className="space-y-2">
-                    {[{ n: "mexa.lv", seo: 2, mob: 1, spd: 3, bg: "bg-red-50" },{ n: "meha.lv", seo: 6, mob: 7, spd: 6, bg: "bg-gray-50" },{ n: "graudi.lv", seo: 7, mob: 8, spd: 7, bg: "bg-gray-50" }].map(({ n, seo, mob, spd, bg }) => (
+                    {[
+                      { n: "ecoagroforest", seo: 0, mob: 0, spd: 0, bg: "bg-red-50" },
+                      { n: "latforest.lv", seo: 5, mob: 6, spd: 5, bg: "bg-gray-50" },
+                      { n: "agromeistars.lv", seo: 6, mob: 7, spd: 6, bg: "bg-gray-50" },
+                    ].map(({ n, seo, mob, spd, bg }) => (
                       <div key={n} className={`${bg} rounded-lg px-3 py-2 flex items-center justify-between text-xs`}>
-                        <span className="font-bold text-gray-700 w-28">{n}</span>
+                        <span className="font-bold text-gray-700 w-32">{n}</span>
                         <span className="text-gray-500">SEO: <b>{seo}/10</b></span>
                         <span className="text-gray-500">Mob: <b>{mob}/10</b></span>
                         <span className="text-gray-500">Ātr: <b>{spd}/10</b></span>
@@ -746,7 +849,7 @@ export default function App() {
                   </div>
                 </div>
                 <div className="px-5 py-4 grid grid-cols-4 gap-3 bg-gray-50">
-                  {[{ l: "HTTP pieprasījumi", v: "87" },{ l: "Lapas svars", v: "14.2 MB" },{ l: "Pirmā ielāde", v: "8.3 sek" },{ l: "Bojātas saites", v: "47" }].map(({ l, v }) => (
+                  {[{ l: "Indexētas lapas", v: "0" }, { l: "Organiskais trafiks", v: "0/mēn" }, { l: "Google pozīcija", v: "nav" }, { l: "Digitālā klātbūtne", v: "0%" }].map(({ l, v }) => (
                     <div key={l} className="text-center">
                       <p className="text-base font-extrabold text-gray-800">{v}</p>
                       <p className="text-[9px] text-gray-400 uppercase tracking-wide leading-tight mt-0.5">{l}</p>
@@ -757,7 +860,7 @@ export default function App() {
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent from-[38%] to-white to-[72%] pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-10 px-6 text-center pointer-events-auto">
-              <p className="text-sm text-gray-500 mb-4 font-medium">Gribi redzēt pilnu auditu un ko mēs varam uzlabot?</p>
+              <p className="text-sm text-gray-500 mb-4 font-medium">Gribi redzēt pilnu auditu un ko mēs varam mainīt?</p>
               <button
                 onClick={() => scrollTo("cta")}
                 className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer text-sm">
@@ -779,7 +882,7 @@ export default function App() {
           <h2 className="text-4xl font-extrabold text-gray-900 mb-3 leading-tight">Patīk tas, ko redzi?</h2>
           <p className="text-xl text-gray-600 mb-4">Tas, ko redzi — ir tikai aisberga redzamā daļa.</p>
           <p className="text-gray-500 max-w-lg mx-auto mb-4 leading-relaxed">
-            Šī lapa tika izveidota personalīzeta Jums— ar jūsu īstajiem attēliem, jūsu krāsām, jūsu produktiem. Taču vizuālais izskats ir tikai sākums.
+            Šī lapa tika izveidota personalizēta Jums — ar jūsu nozares saturu, jūsu pakalpojumiem, jūsu krāsām. Taču vizuālais izskats ir tikai sākums.
           </p>
           <p className="text-gray-500 max-w-lg mx-auto mb-10 leading-relaxed">
             Aiz tā stāv tehnoloģijas un atjauninājumi, kas palīdz ar SEO rankošanos Google un AI laikmeta meklētājos — tā jūsu klienti jūs atrod, pirms viņi vispār nokļūst uz lapas.
@@ -808,7 +911,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── Team section ───────────────────────────────────── */}
+        {/* Team section */}
         <div className="max-w-4xl mx-auto px-6 pb-10">
           <div className="border-t border-gray-100 pt-10 text-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">Mūsu komanda</p>
@@ -869,7 +972,7 @@ export default function App() {
         <div className="border-t border-gray-100 bg-gray-50">
           <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
             <span>© {new Date().getFullYear()} ClicksScale. Visas tiesības aizsargātas.</span>
-            <span className="italic">Šī lapa ir izveidota kā demonstrācija MEXA — nav publiska mājaslapa.</span>
+            <span className="italic">Šī lapa ir izveidota kā demonstrācija EcoAgroForest SIA — nav publiska mājaslapa.</span>
           </div>
         </div>
       </section>
